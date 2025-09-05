@@ -17,8 +17,17 @@ for sphere in df.columns:
     st.subheader(sphere)
     subs = df[sphere].dropna().tolist()
     sliders[sphere] = []
-    for sub in subs:
-        val = st.slider(f"{sub}", min_value=1, max_value=6, value=3, step=1)
+    for i, sub in enumerate(subs):
+        # Создаем уникальный ключ для каждого слайдера
+        unique_key = f"{sphere}_{sub}_{i}"
+        val = st.slider(
+            f"{sub}",
+            min_value=1,
+            max_value=6,
+            value=3,
+            step=1,
+            key=unique_key  # Добавляем уникальный ключ
+        )
         sliders[sphere].append((sub, val))
 
 # === Кнопка для построения колеса ===
